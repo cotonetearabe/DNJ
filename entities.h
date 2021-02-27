@@ -7,17 +7,20 @@
 
 class Entity {
 	public:
-		Entity(int max_health, int carry_capacity, int base_damage, float base_speed) {
+		/* Contructor */
+		Entity(int max_health, int carry_capacity, int base_damage,
+			float base_speed) {
 			this->max_health = max_health;
 			this->health = max_health;
 			this->carry_capacity = carry_capacity;
 			this->base_damage = base_damage;
 			float base_speed = base_speed;
 		}
-
+		Entity() {}
 		~Entity() {}
 
-		// Gets
+		/* Gets */
+		u_int32_t getRoomId() {return room_id;}
 		int getMaxHealth() {return max_health;}
 		int getHealth() {return health;}
 		int getCarryCapacity() {return carry_capacity;}
@@ -26,26 +29,28 @@ class Entity {
 		std::vector<Object> getEquipment() {return equipment;}
 		std::vector<Object> getInventory() {return inventory;}
 
-		// Sets
+		/* Sets */
 		void setMaxHealth(int max_health) {this->max_health = max_health;}
-		void setCarryCapacity(int carry_capacity) {this->carry_capacity = carry_capacity;}
+		void setCarryCapacity(int carry_capacity) {
+			this->carry_capacity = carry_capacity;
+		}
 		void setBaseDamage(int base_damage) {this->base_damage = base_damage;}
 		void setBaseSpeed(float base_speed) {this->base_speed = base_speed;}
 
-		// Iventory management
+		/* Inventory */
 		std::vector<Object> getEquipment() {return equipment;}
 		
 		std::vector<Object> getInventory() {return inventory;}
 
-		// Combat management	
-		bool receiveDmg(int dmg) { // returns true if still alive after receiving dmg
+		/* Combat */
+		bool receiveDmg(int dmg) {
 			if(dmg >= health) {
 				health = 0;
 				return false;
 			}
 
 			health -= dmg;
-			return true;
+			return true; /* returns true if still alive after receiving dmg */
 		}
 
 		void heal(int heal_value) {
@@ -59,6 +64,7 @@ class Entity {
 		}
 
 	protected:
+		u_int32_t room_id;
 		int max_health;
 		int health;
 		int carry_capacity;

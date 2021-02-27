@@ -6,45 +6,55 @@
 #include <iostream>
 #include <vector>
 
-#define N_DIRECTIONS 4 // north, east, south, west
-
-///////////////////////////////////////////////////////////////////////////////
+#define N_DIRECTIONS 6 // north, east, south, west, up and down
 
 class Room {
 	public:
-		Room(u_int32_t id, int north, int east, int south, int west,
-		std::string& description, std::vector<int>& loot)
-		: id(id), north(north), east(east), south(south), west(west),
-		description(description), loot(loot) {}
+		Room(u_int32_t id, u_int32_t north, u_int32_t east, u_int32_t south,
+			u_int32_t west, u_int32_t up, u_int32_t down,
+			std::string& description, std::vector<int>& loot) {
+			this->id = id;
+			this->north = north;
+			this->east = east;
+			this->south = south;
+			this->west = west;
+			this->up = up;
+			this->down = down;
+			this->description = description;
+			this->loot = loot;
+		}
 		
-		~Room() {
-			// TODO: do i need to something with loot and description? hmmmm 🤔
-		}
+		~Room() {}
 
-		u_int32_t get_id() { return this->id; }
-		int get_north() { return this->north; }
-		int get_east() { return this->east; }
-		int get_south() { return this->south; }
-		int get_west() { return this->west; }
-		std::string& get_description() { return this->description; }
-		std::vector<int>& get_loot() { return this->loot; }
+		// Gets
+		u_int32_t getId() { return this->id; }
+		int getNorth() { return this->north; }
+		int getEast() { return this->east; }
+		int getSouth() { return this->south; }
+		int getWest() { return this->west; }
+		int getUp() { return this->up; }
+		int getDown() { return this->down; }
+		std::string& getDescription() { return this->description; }
+		std::vector<int>& getLoot() { return this->loot; }
 
-		void add_loot(int loot_id) {
-			this->loot.push_back(loot_id);
-		}
+		// Loot
+		void addLoot(int loot_id) { this->loot.push_back(loot_id); }
 
-		void remove_loot(int loot_id_index) {
+		void removeLoot(int loot_id_index) {
 			this->loot.erase(this->loot.begin() + loot_id_index);
 		}
 
 	private:
 		u_int32_t id;
-		int north;
-		int east;
-		int south;
-		int west;
+		u_int32_t north;
+		u_int32_t east;
+		u_int32_t south;
+		u_int32_t west;
+		u_int32_t up;
+		u_int32_t down;
 		std::string description;
 		std::vector<int> loot;
+
 };
 
 class Map {

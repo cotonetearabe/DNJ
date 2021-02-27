@@ -7,9 +7,18 @@
 #include <vector>
 
 #define N_RARITY 4 // super, rare, uncommon, common
+#define SUPER 'S'
+#define RARE 'R'
+#define UNCOMMON 'U'
+#define COMMON 'C'
+#define N_TYPE_ARMOR 4 // head, body, legs, feet
+#define HEAD 'H'
+#define BODY 'B'
+#define LEGS 'L'
+#define FEET 'F'
 
 class Object {
-	private:
+	protected:
 		u_int32_t id;
 		std::string& name;
 		std::string& description;
@@ -24,7 +33,7 @@ class Loot : public Object {
 
 class Armor : public Object {
 	private:
-		char type; // H, B, P, S
+		char type; // H, B, L, F
 		u_int32_t defense_value;
 };
 
